@@ -2,6 +2,7 @@ import useGetBook from "../hooks/getBook";
 import Character from "../components/Character";
 import { getId } from "../utils";
 import { Link } from "react-router-dom";
+import { ROUTES } from "../const";
 
 function Book({ id, withCharacter }) {
   const { data, isLoading, error } = useGetBook({ id });
@@ -12,7 +13,7 @@ function Book({ id, withCharacter }) {
 
   return (
     <div>
-      <Link to={`book/${getId(data.url)}`}>{data.name}</Link>
+      <Link to={ROUTES.BOOK(getId(data.url))}>{data.name}</Link>
       {withCharacter && (
         <>
           <p>characters</p>
@@ -20,7 +21,7 @@ function Book({ id, withCharacter }) {
           <ul>
             {data.characters.map((character, index) => (
               <li key={index}>
-                <Character id={getId(character)} />
+                <Character id={getId(character)} withBook />
               </li>
             ))}
           </ul>

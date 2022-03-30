@@ -5,21 +5,25 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { QueryClient, QueryClientProvider } from "react-query";
+import FavoriteCharacter from "./contexts/FavoriteCharacter";
 
 import ListBooks from "./pages/ListBooks.page";
 import Books from "./pages/Book.page";
+import { ROUTES } from "./const";
 
 const queryClient = new QueryClient();
 
 const rootElement = document.getElementById("root");
 render(
   <QueryClientProvider client={queryClient}>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<ListBooks />} />
-        <Route path="book/:id" element={<Books />} />
-      </Routes>
-    </BrowserRouter>
+    <FavoriteCharacter>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<ListBooks />} />
+          <Route path={ROUTES.BOOK()} element={<Books />} />
+        </Routes>
+      </BrowserRouter>
+    </FavoriteCharacter>
   </QueryClientProvider>,
   rootElement
 );
