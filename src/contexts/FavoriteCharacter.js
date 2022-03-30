@@ -1,9 +1,9 @@
 import React, { createContext, useState } from "react";
-import Character from "../components/Character";
+import FavoriteCharacter from "../components/FavoriteCharacter";
 
 export const FavoriteCharacterContext = createContext(null);
 
-const FavoriteCharacter = ({ children }) => {
+const FavoriteCharacterCtx = ({ children }) => {
   const [favorites, setFavorites] = useState([]);
 
   const addCharacter = (id) => {
@@ -12,21 +12,19 @@ const FavoriteCharacter = ({ children }) => {
     setFavorites([...favorites, id]);
   };
 
+  const removeCharacter = (id) => {
+    setFavorites(favorites.filter((_id) => _id !== id));
+  };
+
   return (
     <FavoriteCharacterContext.Provider value={{ addCharacter, favorites }}>
-      <>
-        <p>Favorite characters:</p>
-        <ul>
-          {favorites.map((id) => (
-            <li>
-              <Character id={id} withBook={false} />
-            </li>
-          ))}
-        </ul>
-      </>
+      <FavoriteCharacter
+        favorites={favorites}
+        removeCharacter={removeCharacter}
+      />
       {children}
     </FavoriteCharacterContext.Provider>
   );
 };
 
-export default FavoriteCharacter;
+export default FavoriteCharacterCtx;

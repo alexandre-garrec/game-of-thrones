@@ -7,6 +7,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import FavoriteCharacter from "./contexts/FavoriteCharacter";
 
+import TopBar from "./components/TopBar";
+import Content from "./components/Content";
+
 import ListBooks from "./pages/ListBooks.page";
 import Books from "./pages/Book.page";
 import { ROUTES } from "./const";
@@ -18,10 +21,13 @@ render(
   <QueryClientProvider client={queryClient}>
     <FavoriteCharacter>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<ListBooks />} />
-          <Route path={ROUTES.BOOK()} element={<Books />} />
-        </Routes>
+        <TopBar />
+        <Content>
+          <Routes>
+            <Route path="/" element={<ListBooks />} />
+            <Route path={ROUTES.BOOK()} element={<Books />} />
+          </Routes>
+        </Content>
       </BrowserRouter>
     </FavoriteCharacter>
   </QueryClientProvider>,

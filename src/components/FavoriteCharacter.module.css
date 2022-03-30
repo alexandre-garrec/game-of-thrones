@@ -1,0 +1,13 @@
+.wrapper {
+  position: fixed;
+  right: 0;
+  top: 40px;
+  border: 1px solid #e5e5e5;
+  width: 300px;
+  padding: 10px;
+}
+
+.favorite {
+  display: flex;
+  flex-direction: row;
+}
